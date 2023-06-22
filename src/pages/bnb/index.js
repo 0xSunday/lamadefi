@@ -3,7 +3,7 @@ import { SingleCoin } from "../../../config/api";
 
 import React from "react";
 
-const index =  () => {
+const index = ({ apiData }) => {
   // const apiData = SingleCoin("binancecoin");
   // const response = await fetch(apiData, {
   //   next: {
@@ -14,11 +14,26 @@ const index =  () => {
 
   // console.log(data.market_data.current_price.usd);
   return (
-    <div>
-      {/* <RightSection data={data} /> */}
-      <h1>hello sunil</h1>
+    <div className="ml-72 mt-5 mr-3 bg-black pt-5 px-5 pb-2 rounded-lg">
+      <RightSection data={apiData} />
+      {/* <h1>hello sunil</h1> */}
     </div>
   );
 };
+
+export async function getServerSideProps() {
+  // Fetch data from API
+  const apiDataresponse = SingleCoin("binancecoin");
+
+  const response = await fetch(apiDataresponse);
+  const data = await response.json();
+
+  // Pass the fetched data as props
+  return {
+    props: {
+      apiData: data,
+    },
+  };
+}
 
 export default index;

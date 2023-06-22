@@ -3,6 +3,7 @@ import ApiData from "./ApiData";
 
 import Image from "next/image";
 import Graph from "./Graph";
+import SkeletonLoad from "./SkeletonLoad";
 const RightSection = ({ data }) => {
   // console.log(props.data.market_data.current_price.usd);
   // setInterval(() => {
@@ -43,6 +44,8 @@ const RightSection = ({ data }) => {
           <Graph coin={data.id} />
         </div>
       </div>
+
+      {/* <SkeletonLoad /> */}
     </div>
   );
 };

@@ -5,7 +5,9 @@ export default function App({ Component, pageProps }) {
   return (
     <>
       <Sidebar />
-      <Component {...pageProps} />
+      <div className="rightside">
+        <Component {...pageProps} />
+      </div>
     </>
   );
 }

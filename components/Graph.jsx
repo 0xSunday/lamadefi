@@ -1,16 +1,21 @@
 import { data } from "autoprefixer";
 import React, { useEffect, useState } from "react";
 import { Line } from "react-chartjs-2";
+import Chart from "chart.js/auto";
 import { HistoricalChart } from "../config/api";
+import { chartDays } from "../config/data";
+import SelectButton from "./SelectButton";
 
 const Graph = ({ coin }) => {
   const [historicData, setHistoricData] = useState();
   const [days, setDays] = useState(1);
+  const [flag, setflag] = useState(false);
 
   const fetchHistoricData = async () => {
-    const apiData = HistoricalChart("bitcoin", "1");
+    const apiData = HistoricalChart(coin, days);
     const response = await fetch(apiData);
     const graphData = await response.json();
+    setflag(true);
     setHistoricData(graphData.prices);
   };
 
@@ -43,11 +48,11 @@ const Graph = ({ coin }) => {
   // }, [days]);
 
   return (
-    <div>
-      {!historicData ? (
+    <div className="flex justify-center items-center">
+      {!historicData | (flag === false) ? (
         <div
           role="status"
-          className="flex h-full ml-52 justify-center items-center w-full"
+          className="flex h-full justify-center items-center w-full"
         >
           <svg
             aria-hidden="true"
@@ -68,34 +73,57 @@ const Graph = ({ coin }) => {
           <span className="sr-only">Loading...</span>
         </div>
       ) : (
-        <div>
-          <Line
-            data={{
-              labels: historicData.map((coin) => {
-                let date = new Date(coin[0]);
-                let time =
-                  date.getHours() > 12
-                    ? `${date.getHours() - 12}:${date.getMinutes()} PM`
-                    : `${date.getHours()}:${date.getMinutes()} AM`;
-                return days === 1 ? time : date.toLocaleDateString();
-              }),
+        <div className="graphmain">
+          <div className="graphstyles">
+            <Line
+              data={{
+                labels: historicData.map((coin) => {
+                  let date = new Date(coin[0]);
+                  let time =
+                    date.getHours() > 12
+                      ? `${date.getHours() - 12}:${date.getMinutes()} PM`
+                      : `${date.getHours()}:${date.getMinutes()} AM`;
+                  return days === 1 ? time : date.toLocaleDateString();
+                }),
 
-              datasets: [
-                {
-                  data: historicData.map((coin) => coin[1]),
-                  label: `Price ( Past ${days} Days ) `,
-                  borderColor: "#EEBC1D",
+                datasets: [
+                  {
+                    data: historicData.map((coin) => coin[1]),
+                    label: `Price ( Past ${days} Days )`,
+                    borderColor: "#EEBC1D",
+                  },
+                ],
+              }}
+              options={{
+                elements: {
+                  point: {
+                    radius: 1,
+                  },
                 },
-              ],
+              }}
+            />
+          </div>
+          <div
+            style={{
+              display: "flex",
+              marginTop: 20,
+              justifyContent: "space-around",
+              width: "100%",
             }}
-            options={{
-              elements: {
-                point: {
-                  radius: 1,
-                },
-              },
-            }}
-          />
+          >
+            {chartDays.map((day) => (
+              <SelectButton
+                key={day.value}
+                onClick={() => {
+                  setDays(day.value);
+                  setflag(false);
+                }}
+                selected={day.value === days}
+              >
+                {day.label}
+              </SelectButton>
+            ))}
+          </div>
         </div>
       )}
     </div>

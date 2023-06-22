@@ -1,8 +1,29 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
+/* className="ml-72 mt-5 mb-36 mr-3 bg-black pt-5 px-5 pb-32 rounded-lg" */
 body {
   background-color: rgb(23, 24, 28);
   color: white;
+}
+.rightside {
+  margin: 1rem 2rem 1rem 18rem;
+  background-color: black;
+  padding: 1rem 1rem 2rem 1rem;
+  border-radius: 1rem;
+}
+/* justify-around w-[60rem] h-full ml-6 */
+.graphstyles {
+  min-width: 60rem;
+  height: 100%;
+  display: flex;
+
+  justify-content: space-around;
+  align-items: center;
+}
+.graphmain {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }

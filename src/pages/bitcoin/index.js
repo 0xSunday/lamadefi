@@ -13,7 +13,7 @@ const index = ({ apiData }) => {
 
   // console.log(apiData);
   return (
-    <div className="ml-72 mt-5 mr-3 bg-black pt-5 px-5 pb-2 rounded-lg">
+    <div >
       <RightSection data={apiData} />
       {/* <h1>hello sunil</h1> */}
     </div>

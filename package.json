@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "autoprefixer": "10.4.14",
+    "chartjs-plugin-zoom": "^2.0.1",
     "eslint": "8.43.0",
     "eslint-config-next": "13.4.7",
     "next": "13.4.7",

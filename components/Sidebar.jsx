@@ -2,16 +2,16 @@ import React, { useState } from "react";
 import Link from "next/link";
 const Sidebar = () => {
   const [collapsed, setCollapsed] = useState(false);
-  const [selectedButton, setSelectedButton] = useState(null);
+  const [selectedButton, setSelectedButton] = useState(0);
   const toggleSidebar = () => {
     setCollapsed(!collapsed);
   };
 
-  const handleButtonClick = (buttonIndex) => {
+  const handleButtonClick = (buttonIndex = 0) => {
     setSelectedButton(buttonIndex);
   };
 
-  const getButtonColor = (buttonIndex) => {
+  const getButtonColor = (buttonIndex = 0) => {
     return selectedButton === buttonIndex ? "  bg-black" : "";
   };
 

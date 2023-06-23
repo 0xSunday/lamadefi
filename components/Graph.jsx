@@ -8,8 +8,14 @@ import SelectButton from "./SelectButton";
 
 const Graph = ({ coin }) => {
   const [historicData, setHistoricData] = useState();
+  const [historicMcap, sethistoricMcap] = useState();
+  const [historicTvl, sethistoricTvl] = useState();
+
+  const [graphData, setGraphData] = useState();
   const [days, setDays] = useState(1);
   const [flag, setflag] = useState(false);
+
+  const [selectedButton, setSelectedButton] = useState(0);
 
   const fetchHistoricData = async () => {
     const apiData = HistoricalChart(coin, days);
@@ -17,39 +23,33 @@ const Graph = ({ coin }) => {
     const graphData = await response.json();
     setflag(true);
     setHistoricData(graphData.prices);
+    sethistoricMcap(graphData.market_caps);
+    sethistoricTvl(graphData.total_volumes);
   };
 
-  // console.log(historicData);f
+  // console.log(graphData);
 
   useEffect(() => {
     fetchHistoricData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [days]);
+  }, [historicData, historicMcap, historicTvl, days]);
 
-  // working
-  // const apiData = HistoricalChart("bitcoin", "1");
-  // const response = await fetch(apiData, {
-  //   next: {
-  //     revalidate: 1000,
-  //   },
-  // });
-  // const graphData = await response.json();
-  // setHistoricData(graphData.prices);
+  const handleButtonClick = (buttonIndex, valueD) => {
+    setSelectedButton(buttonIndex);
+    setGraphData(valueD);
+  };
+  const style = "bg-yellow-400 text-black";
+  const getButtonColor = (buttonIndex) => {
+    return selectedButton === buttonIndex ? style : "";
+  };
 
-  // console.log(historicData);
-
-  // const fetchData = async () => {
-  //   const data = await fetch(HistoricalChart(coin.id, days));
-  //   setHistoricData(data.prices);
-  // };
-  // // console.log("data", historicData);
-  // useEffect(() => {
-  //   fetchData();
-  // }, [days]);
+  const selectedData = (buttonIndex = 0) => {
+    return selectedButton === buttonIndex;
+  };
 
   return (
     <div className="flex justify-center items-center">
-      {!historicData | (flag === false) ? (
+      {!historicData | (flag === false) | !historicMcap | !historicTvl ? (
         <div
           role="status"
           className="flex h-full justify-center items-center w-full"
@@ -73,35 +73,169 @@ const Graph = ({ coin }) => {
           <span className="sr-only">Loading...</span>
         </div>
       ) : (
-        <div className="graphmain">
-          <div className="graphstyles">
-            <Line
-              data={{
-                labels: historicData.map((coin) => {
-                  let date = new Date(coin[0]);
-                  let time =
-                    date.getHours() > 12
-                      ? `${date.getHours() - 12}:${date.getMinutes()} PM`
-                      : `${date.getHours()}:${date.getMinutes()} AM`;
-                  return days === 1 ? time : date.toLocaleDateString();
-                }),
+        <div className="graphmain flex flex-col  gap-6">
+          <div className="flex gap-40">
+            <div
+              onClick={() => handleButtonClick(0, historicData)}
+              className={`border-2 border-yellow-400 rounded-lg p-4 px-6  ${getButtonColor(
+                0
+              )} hover:bg-yellow-400 hover:text-black `}
+            >
+              Price
+            </div>
 
-                datasets: [
-                  {
-                    data: historicData.map((coin) => coin[1]),
-                    label: `Price ( Past ${days} Days )`,
-                    borderColor: "#EEBC1D",
+            <div
+              onClick={() => handleButtonClick(1, historicMcap)}
+              className={`border-2 border-yellow-400 rounded-lg p-4 px-6  ${getButtonColor(
+                1
+              )} hover:bg-yellow-400 hover:text-black `}
+            >
+              MCap
+            </div>
+
+            <div
+              onClick={() => handleButtonClick(2, historicTvl)}
+              className={`border-2 border-yellow-400 rounded-lg p-4 px-6  ${getButtonColor(
+                2
+              )} hover:bg-yellow-400 hover:text-black `}
+            >
+              TVL
+            </div>
+          </div>
+          <div className="graphstyles">
+            {selectedData(0) && (
+              <Line
+                data={{
+                  labels: historicData?.map((coin) => {
+                    let date = new Date(coin[0]);
+                    let time =
+                      date.getHours() > 12
+                        ? `${date.getHours() - 12}:${date.getMinutes()} PM`
+                        : `${date.getHours()}:${date.getMinutes()} AM`;
+                    return days === 1 ? time : date.toLocaleDateString();
+                  }),
+
+                  datasets: [
+                    {
+                      data: historicData?.map((coin) => coin[1]),
+                      label: `Price ( Past ${days} Days )`,
+                      borderColor: "#EEBC1D",
+                      hoverBorderJoinStyle: "round",
+                      pointBackgroundColor: "rgba(0,0,255,1)",
+                    },
+                  ],
+                }}
+                options={{
+                  elements: {
+                    point: {
+                      radius: 1,
+                    },
                   },
-                ],
-              }}
-              options={{
-                elements: {
-                  point: {
-                    radius: 1,
+                  plugins: {
+                    zoom: {
+                      zoom: {
+                        wheel: {
+                          enabled: true,
+                        },
+                        pinch: {
+                          enabled: true,
+                        },
+                        mode: "xy",
+                      },
+                    },
                   },
-                },
-              }}
-            />
+                }}
+              />
+            )}
+            {selectedData(1) && (
+              <Line
+                data={{
+                  labels: historicMcap?.map((coin) => {
+                    let date = new Date(coin[0]);
+                    let time =
+                      date.getHours() > 12
+                        ? `${date.getHours() - 12}:${date.getMinutes()} PM`
+                        : `${date.getHours()}:${date.getMinutes()} AM`;
+                    return days === 1 ? time : date.toLocaleDateString();
+                  }),
+
+                  datasets: [
+                    {
+                      data: historicMcap?.map((coin) => coin[1]),
+                      label: `MCap ( Past ${days} Days )`,
+                      borderColor: "#EEBC1D",
+                      hoverBorderJoinStyle: "round",
+                      pointBackgroundColor: "rgba(0,0,255,1)",
+                    },
+                  ],
+                }}
+                options={{
+                  elements: {
+                    point: {
+                      radius: 1,
+                    },
+                  },
+                  plugins: {
+                    zoom: {
+                      zoom: {
+                        wheel: {
+                          enabled: true,
+                        },
+                        pinch: {
+                          enabled: true,
+                        },
+                        mode: "xy",
+                      },
+                    },
+                  },
+                }}
+              />
+            )}
+
+            {selectedData(2) && (
+              <Line
+                data={{
+                  labels: historicTvl?.map((coin) => {
+                    let date = new Date(coin[0]);
+                    let time =
+                      date.getHours() > 12
+                        ? `${date.getHours() - 12}:${date.getMinutes()} PM`
+                        : `${date.getHours()}:${date.getMinutes()} AM`;
+                    return days === 1 ? time : date.toLocaleDateString();
+                  }),
+
+                  datasets: [
+                    {
+                      data: historicTvl?.map((coin) => coin[1]),
+                      label: `MCap ( Past ${days} Days )`,
+                      borderColor: "#EEBC1D",
+                      hoverBorderJoinStyle: "round",
+                      pointBackgroundColor: "rgba(0,0,255,1)",
+                    },
+                  ],
+                }}
+                options={{
+                  elements: {
+                    point: {
+                      radius: 1,
+                    },
+                  },
+                  plugins: {
+                    zoom: {
+                      zoom: {
+                        wheel: {
+                          enabled: true,
+                        },
+                        pinch: {
+                          enabled: true,
+                        },
+                        mode: "xy",
+                      },
+                    },
+                  },
+                }}
+              />
+            )}
           </div>
           <div
             style={{

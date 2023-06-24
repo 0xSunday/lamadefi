@@ -1,7 +1,5 @@
-import { data } from "autoprefixer";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Line } from "react-chartjs-2";
-import Chart from "chart.js/auto";
 import { HistoricalChart } from "../config/api";
 import { chartDays } from "../config/data";
 import SelectButton from "./SelectButton";
@@ -79,7 +77,7 @@ const Graph = ({ coin }) => {
           <div className="flex gap-40">
             <div
               onClick={() => handleButtonClick(0, historicData)}
-              className={`border-2 border-yellow-400 rounded-lg p-4 px-6  ${getButtonColor(
+              className={`border-2 font-bold  border-yellow-400 rounded-lg p-4 px-6  ${getButtonColor(
                 0
               )} hover:bg-yellow-400 hover:text-black `}
             >
@@ -88,7 +86,7 @@ const Graph = ({ coin }) => {
 
             <div
               onClick={() => handleButtonClick(1, historicMcap)}
-              className={`border-2 border-yellow-400 rounded-lg p-4 px-6  ${getButtonColor(
+              className={`border-2 font-bold border-yellow-400 rounded-lg p-4 px-6  ${getButtonColor(
                 1
               )} hover:bg-yellow-400 hover:text-black `}
             >
@@ -97,7 +95,7 @@ const Graph = ({ coin }) => {
 
             <div
               onClick={() => handleButtonClick(2, historicTvl)}
-              className={`border-2 border-yellow-400 rounded-lg p-4 px-6  ${getButtonColor(
+              className={`border-2 font-bold border-yellow-400 rounded-lg p-4 px-6  ${getButtonColor(
                 2
               )} hover:bg-yellow-400 hover:text-black `}
             >

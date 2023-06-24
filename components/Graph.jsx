@@ -3,7 +3,7 @@ import { Line } from "react-chartjs-2";
 import { HistoricalChart } from "../config/api";
 import { chartDays } from "../config/data";
 import SelectButton from "./SelectButton";
-
+import Chart from "chart.js/auto";
 const Graph = ({ coin }) => {
   const [historicData, setHistoricData] = useState();
   const [historicMcap, sethistoricMcap] = useState();

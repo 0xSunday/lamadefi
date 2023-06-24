@@ -22,36 +22,36 @@ const Sidebar = () => {
       </div>
       <nav className="mt-4 flex-1">
         <ul className="list-reset flex flex-col gap-4">
-          <li
-            onClick={() => handleButtonClick(0)}
-            className={`px-4 py-2 text-2xl font-bold hover:bg-black rounded-2xl ${getButtonColor(
-              0
-            )}`}
-          >
-            <Link href="/bitcoin" className="text-white  ">
+          <Link href="/bitcoin" className="text-white  ">
+            <li
+              onClick={() => handleButtonClick(0)}
+              className={`px-4 py-2 text-2xl font-bold hover:bg-black rounded-2xl ${getButtonColor(
+                0
+              )}`}
+            >
               Bitcoin
-            </Link>
-          </li>
-          <li
-            onClick={() => handleButtonClick(1)}
-            className={`px-4 py-2 text-2xl font-bold hover:bg-black rounded-2xl ${getButtonColor(
-              1
-            )}`}
-          >
-            <Link href="/ethereum" className="text-white  ">
+            </li>
+          </Link>
+          <Link href="/ethereum" className="text-white  ">
+            <li
+              onClick={() => handleButtonClick(1)}
+              className={`px-4 py-2 text-2xl font-bold hover:bg-black rounded-2xl ${getButtonColor(
+                1
+              )}`}
+            >
               Ethereum
-            </Link>
-          </li>
-          <li
-            onClick={() => handleButtonClick(2)}
-            className={`px-4 py-2 text-2xl font-bold hover:bg-black rounded-2xl ${getButtonColor(
-              2
-            )}`}
-          >
-            <Link href="/bnb" className="text-white  ">
+            </li>
+          </Link>
+          <Link href="/bnb" className="text-white  ">
+            <li
+              onClick={() => handleButtonClick(2)}
+              className={`px-4 py-2 text-2xl font-bold hover:bg-black rounded-2xl ${getButtonColor(
+                2
+              )}`}
+            >
               BNB
-            </Link>
-          </li>
+            </li>
+          </Link>
         </ul>
       </nav>
     </div>

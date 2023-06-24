@@ -4,3 +4,6 @@ export const SingleCoin = (id) =>
 
 export const HistoricalChart = (id, days = 365) =>
   `https://api.coingecko.com/api/v3/coins/${id}/market_chart?vs_currency=usd&days=${days}`;
+
+export const totalValue = (id, days) =>
+  `https://api.coingecko.com/api/v3/coins/${id}/market_chart?vs_currency=usd&days=${days}&interval=daily&precision=2`;

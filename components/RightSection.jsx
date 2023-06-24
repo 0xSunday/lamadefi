@@ -1,15 +1,7 @@
 import React from "react";
-import ApiData from "./ApiData";
-
-import Image from "next/image";
 import Graph from "./Graph";
-import SkeletonLoad from "./SkeletonLoad";
+
 const RightSection = ({ data }) => {
-  // console.log(props.data.market_data.current_price.usd);
-  // setInterval(() => {
-  //   // props.data.market_data.current_price.usd;
-  //   // console.log("interval");
-  // }, 1000);
   return (
     <div className="flex  flex-col gap-16 ">
       <div className="flex flex-row gap-2 items-center">
@@ -36,16 +28,12 @@ const RightSection = ({ data }) => {
           <p>{data.market_data.circulating_supply}</p>
         </div>
       </div>
-      <div className="flex justify-center items-center ">
-        {/* <div className="flex flex-col flex-[40%]">
-          <ApiData data={data} />
-        </div> */}
-        <div className="flex justify-center items-center">
-          <Graph coin={data.id} />
-        </div>
+      {/* <div className="flex items-center justify-around">
+        <ApiData coin={data.id} />
+      </div> */}
+      <div className="flex justify-center items-center">
+        <Graph coin={data.id} />
       </div>
-
-      {/* <SkeletonLoad /> */}
     </div>
   );
 };

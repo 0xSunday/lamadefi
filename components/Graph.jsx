@@ -17,26 +17,28 @@ const Graph = ({ coin }) => {
 
   const [selectedButton, setSelectedButton] = useState(0);
 
-  const fetchHistoricData = async () => {
-    const apiData = HistoricalChart(coin, days);
-    const response = await fetch(apiData);
-    const graphData = await response.json();
-    setflag(true);
-    setHistoricData(graphData.prices);
-    sethistoricMcap(graphData.market_caps);
-    sethistoricTvl(graphData.total_volumes);
-  };
-
-  // console.log(graphData);
-
   useEffect(() => {
+    const fetchHistoricData = async () => {
+      try {
+        const apiData = HistoricalChart(coin, days);
+        const response = await fetch(apiData);
+        const graphData = await response.json();
+        console.log("reload");
+        setflag(true);
+        setHistoricData(graphData.prices);
+        sethistoricMcap(graphData.market_caps);
+        sethistoricTvl(graphData.total_volumes);
+      } catch (error) {
+        // Handle error
+      }
+    };
     fetchHistoricData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [historicData, historicMcap, historicTvl, days]);
+  }, [days]);
 
-  const handleButtonClick = (buttonIndex, valueD) => {
+  const handleButtonClick = (buttonIndex) => {
     setSelectedButton(buttonIndex);
-    setGraphData(valueD);
+    // setGraphData(valueD);
   };
   const style = "bg-yellow-400 text-black";
   const getButtonColor = (buttonIndex) => {

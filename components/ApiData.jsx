@@ -1,33 +1,26 @@
 import { data } from "autoprefixer";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { totalValue } from "../config/api";
 
-const ApiData = (props) => {
-  const { id, market_data } = props.data;
-  return (
-    <div className="flex flex-col px-3">
-      <div className="text-[20px]">
-        <div className="flex items-center justify-between">
-          <p>TVL</p>
-          <p>${market_data.total_volume.usd}</p>
-        </div>
-        <div className="flex items-center justify-between">
-          <p>MCap</p>
-          <p>${market_data.market_cap.usd}</p>
-        </div>
+const ApiData = ({ coin }) => {
+  const [valueData, setValueData] = useState();
+  const fetchValueData = async () => {
+    // const apiData = totalValue(coin, "0");
+    const response = await fetch(
+      "https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=usd&days=1&interval=daily&precision=2"
+    );
+    const graphData = await response.json();
+    setValueData(graphData);
+  };
 
-        <div className="flex items-center justify-between">
-          <p>Highest Price</p>
-          <p>${market_data.market_cap.usd}</p>
-        </div>
+  console.log(valueData);
 
-        <div className="flex items-center justify-between">
-          <p>Lowest Price</p>
-          <p>${market_data.market_cap.usd}</p>
-        </div>
-      </div>
-      <div></div>
-    </div>
-  );
+  // useEffect(() => {
+  //   fetchHistoricData();
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [days]);
+
+  return <h1>{coin}</h1>;
 };
 
 export default ApiData;

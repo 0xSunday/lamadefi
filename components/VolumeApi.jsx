@@ -17,13 +17,12 @@ const VolumeApi = ({ market_data, coin }) => {
   useEffect(() => {
     const fetchHistoricData = async () => {
       try {
-        const apiData = totalValue(coin); // Make sure 'totalValue' and 'coin' are properly defined
+        const apiData = totalValue(coin);
         const response = await fetch(apiData);
         const graphData = await response.json();
-        setVolume(graphData.total_volumes || []); // Handle cases where 'total_volumes' might be undefined
+        setVolume(graphData.total_volumes || []);
       } catch (error) {
-        console.log(error); // Log the error for debugging
-        // Handle error
+        console.log(error);
       }
     };
     fetchHistoricData();
@@ -77,7 +76,7 @@ const VolumeApi = ({ market_data, coin }) => {
 
       <div className="flex flex-col gap-3">
         <div className="flex font-semibold items-center justify-between">
-          <p>Total Volume 24h</p>
+          <p>Volume 24h</p>
           <p> ${convertToBillion(market_data.total_volume.usd)}</p>
         </div>
 

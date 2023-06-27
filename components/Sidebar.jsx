@@ -16,7 +16,7 @@ const Sidebar = () => {
   };
 
   return (
-    <div className="fixed inset-y-0 z-10 flex flex-col w-64 bg-gray-700 md:w-200">
+    <div className="fixed inset-y-0 z-10 flex flex-col w-60 bg-gray-700 md:w-200">
       <div className="flex-shrink-0 px-4 py-4 bg-gray-900 text-white">
         <h2 className="text-2xl font-semibold">Lama Defi</h2>
       </div>

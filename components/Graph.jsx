@@ -9,7 +9,7 @@ const Graph = ({ coin }) => {
   const [historicMcap, sethistoricMcap] = useState();
   const [historicTvl, sethistoricTvl] = useState();
 
-  const [graphData, setGraphData] = useState();
+  // const [graphData, setGraphData] = useState();
   const [days, setDays] = useState(1);
   const [flag, setflag] = useState(false);
 
@@ -21,7 +21,7 @@ const Graph = ({ coin }) => {
         const apiData = HistoricalChart(coin, days);
         const response = await fetch(apiData);
         const graphData = await response.json();
-        console.log("reload");
+
         setflag(true);
         setHistoricData(graphData.prices);
         sethistoricMcap(graphData.market_caps);
@@ -99,7 +99,7 @@ const Graph = ({ coin }) => {
                 2
               )} hover:bg-yellow-400 hover:text-black `}
             >
-              TVL
+              Volume
             </div>
           </div>
           <div className="graphstyles">

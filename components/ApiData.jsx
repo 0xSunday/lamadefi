@@ -1,26 +1,36 @@
-import { data } from "autoprefixer";
-import React, { useEffect, useState } from "react";
-import { totalValue } from "../config/api";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import PriceApi from "./PriceApi";
+import VolumeApi from "./VolumeApi";
+import MCapApi from "./MCapApi";
 
-const ApiData = ({ coin }) => {
-  const [valueData, setValueData] = useState();
-  const fetchValueData = async () => {
-    // const apiData = totalValue(coin, "0");
-    const response = await fetch(
-      "https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=usd&days=1&interval=daily&precision=2"
-    );
-    const graphData = await response.json();
-    setValueData(graphData);
+const ApiData = ({ market_data, coin }) => {
+  const timestamp = 1687824000000; // The timestamp you want to convert
+  const date = new Date(timestamp);
+  const formattedDate = date.toLocaleString();
+
+  // console.log(formattedDate);
+  // market_data.high_24h
+
+  const convertToMillion = (num) => {
+    if (num >= 1000000) {
+      return (num / 1000000).toFixed(2) + " M";
+    } else {
+      return num.toString();
+    }
   };
 
-  console.log(valueData);
-
-  // useEffect(() => {
-  //   fetchHistoricData();
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [days]);
-
-  return <h1>{coin}</h1>;
+  return (
+    <div className="flex flex-col font-semibold gap-8  ">
+      <div className="flex font-semibold justify-around items-start  ">
+        <PriceApi market_data={market_data} />
+        <VolumeApi market_data={market_data} coin={coin} />
+      </div>
+      <div className="flex font-semibold justify-around items-start">
+        {/* <MCapApi /> */}
+      </div>
+    </div>
+  );
 };
 
 export default ApiData;

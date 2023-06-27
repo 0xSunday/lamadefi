@@ -82,26 +82,35 @@ const VolumeApi = ({ market_data, coin }) => {
 
         <div className="flex font-semibold items-center justify-between">
           <p>Last 7days</p>
-          <p> ${convertToBillion(d7)}</p>
+          <p> ${volume.length > 0 ? convertToBillion(d7) : "Loading..."}</p>
         </div>
 
         <div className="flex font-semibold items-center justify-between">
           <p>Last 1month</p>
-          <p> ${convertToBillion(d30)}</p>
+          <p> ${volume.length > 0 ? convertToBillion(d30) : "Loading..."}</p>
         </div>
 
         <div className="flex font-semibold items-center justify-between">
           <p>Last 3months</p>
-          <p> ${convertToBillion(m3)}</p>
+          <p>
+            {" "}
+            ${volume.length > 0 ? convertToBillion(m3) : "Loading..."}
+          </p>{" "}
         </div>
 
         <div className="flex font-semibold items-center justify-between">
           <p>Last 6months</p>
-          <p> ${convertToBillion(m6)}</p>
+          <p>
+            {" "}
+            ${volume.length > 0 ? convertToBillion(m6) : "Loading..."}
+          </p>{" "}
         </div>
         <div className="flex font-semibold items-center justify-between">
           <p>Last 1year</p>
-          <p> ${convertToBillion(y1)}</p>
+          <p>
+            {" "}
+            ${volume.length > 0 ? convertToBillion(y1) : "Loading..."}
+          </p>{" "}
         </div>
       </div>
     </div>

@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import Graph from "./Graph";
 import ApiData from "./ApiData";
 
 const RightSection = ({ data }) => {
+  const [activeComponent, setActiveComponent] = useState("apiData");
+
   const convertToBillion = (num) => {
     if (num >= 1000000000) {
       return (num / 1000000000).toFixed(2) + " B";
@@ -11,6 +13,14 @@ const RightSection = ({ data }) => {
     } else {
       return num.toString();
     }
+  };
+  const style = "bg-white text-black";
+  const getButtonColor = (buttonIndex) => {
+    return activeComponent === buttonIndex ? style : "";
+  };
+
+  const handleButtonClick = (component) => {
+    setActiveComponent(component);
   };
 
   return (
@@ -48,10 +58,30 @@ const RightSection = ({ data }) => {
         </div>
       </div>
       <div>
-        <ApiData market_data={data.market_data} coin={data.id} />
-      </div>
-      <div className="flex justify-center items-center">
-        <Graph coin={data.id} />
+        <div className="flex items-center justify-around py-8 pb-10 font-bold text-[20px]">
+          <button
+            className={`border-2 font-bold border-white rounded-lg p-4 px-6  ${getButtonColor(
+              "apiData"
+            )} hover:bg-white hover:text-black `}
+            onClick={() => handleButtonClick("apiData")}
+          >
+            Show Data
+          </button>
+          <button
+            className={`border-2 font-bold border-white rounded-lg p-4 px-6  ${getButtonColor(
+              "graph"
+            )} hover:bg-white hover:text-black `}
+            onClick={() => handleButtonClick("graph")}
+          >
+            Show Graph
+          </button>
+        </div>
+        <div>
+          {activeComponent === "apiData" && (
+            <ApiData market_data={data.market_data} coin={data.id} />
+          )}
+          {activeComponent === "graph" && <Graph coin={data.id} />}
+        </div>
       </div>
     </div>
   );

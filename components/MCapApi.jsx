@@ -30,7 +30,7 @@ const MCapApi = ({ market_data, coin }) => {
   }, []);
 
   return (
-    <div className="min-w-[40%] flex flex-col text-[20px]  gap-5 p-5 bg-gray-800 text-white rounded-3xl">
+    <div className="min-w-[45%] flex flex-col text-[20px]  gap-5 p-5 bg-gray-800 text-white rounded-3xl">
       <h1 className="flex  text-center items-center justify-center font-semibold  text-3xl">
         MCap
       </h1>
@@ -38,10 +38,11 @@ const MCapApi = ({ market_data, coin }) => {
       <div className="flex flex-col gap-3">
         <div className="flex font-semibold items-center justify-between">
           <p>MCap Change 24h</p>
-          <p>
-            {convertToBillion(market_data.market_cap_change_24h)} (
-            {market_data.market_cap_change_percentage_24h.toFixed(2)}%)
-          </p>
+          <p>{convertToBillion(market_data.market_cap_change_24h)}</p>
+        </div>
+        <div className="flex font-semibold items-center justify-between">
+          <p>MCap Change 24h%</p>
+          <p>{market_data.market_cap_change_percentage_24h.toFixed(2)}%</p>
         </div>
 
         <div className="flex font-semibold items-center justify-between">

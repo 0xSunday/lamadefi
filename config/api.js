@@ -11,4 +11,9 @@ export const totalValue = (id) =>
 export const OHLC = (id, days) =>
   `https://api.coingecko.com/api/v3/coins/bitcoin/ohlc?vs_currency=usd&${days}=1&precision=2`;
 
+export const FeesApiURL = (id) =>
+  `https://api.llama.fi/overview/fees/${id}?excludeTotalDataChart=true&excludeTotalDataChartBreakdown=true&dataType=dailyFees`;
+export const RevenueApiURL = (id) =>
+  `https://api.llama.fi/overview/fees/${id}?excludeTotalDataChart=true&excludeTotalDataChartBreakdown=true&dataType=dailyRevenue`;
+
 // https://api.coingecko.com/api/v3/coins/${id}/contract/${address}

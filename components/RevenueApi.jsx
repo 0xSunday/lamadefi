@@ -42,8 +42,6 @@ const RevenueApi = ({ coin }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  console.log(protocols);
-
   return (
     <div className="min-w-[45%] flex flex-col text-[20px]  gap-5 p-5 bg-gray-800 text-white rounded-3xl">
       <h1 className="flex  text-center items-center justify-center font-semibold  text-3xl">

@@ -15,5 +15,7 @@ export const FeesApiURL = (id) =>
   `https://api.llama.fi/overview/fees/${id}?excludeTotalDataChart=true&excludeTotalDataChartBreakdown=true&dataType=dailyFees`;
 export const RevenueApiURL = (id) =>
   `https://api.llama.fi/overview/fees/${id}?excludeTotalDataChart=true&excludeTotalDataChartBreakdown=true&dataType=dailyRevenue`;
+export const TVLApiURL = (id) =>
+  `https://api.llama.fi/v2/historicalChainTvl/${id}`;
 
 // https://api.coingecko.com/api/v3/coins/${id}/contract/${address}

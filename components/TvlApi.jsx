@@ -102,7 +102,7 @@ const TvlApi = ({ coin }) => {
 
       <div className="flex flex-col gap-3">
         <div className="flex font-semibold items-center justify-between">
-          <p>Tvl 24h</p>
+          <p>Total Volume Locked </p>
           <p>
             {" "}
             $
@@ -113,42 +113,66 @@ const TvlApi = ({ coin }) => {
         </div>
 
         <div className="flex font-semibold items-center justify-between">
-          <p>Last 7days</p>
-          <p> ${TvlData.length > 0 ? convertToBillion(d7) : "Loading..."}</p>
-        </div>
-
-        <div className="flex font-semibold items-center justify-between">
-          <p>Last 1month</p>
-          <p> ${TvlData.length > 0 ? convertToBillion(d30) : "Loading..."}</p>
-        </div>
-
-        <div className="flex font-semibold items-center justify-between">
-          <p>Last 3months</p>
+          <p>Before 7days</p>
           <p>
             {" "}
-            ${TvlData.length > 0 ? convertToBillion(m3) : "Loading..."}
+            ${" "}
+            {TvlData.length > 0
+              ? convertToBillion(TvlData[TvlData.length - 7].tvl)
+              : "Loading..."}
+          </p>
+        </div>
+
+        <div className="flex font-semibold items-center justify-between">
+          <p>Before 1month</p>
+          <p>
+            {" "}
+            ${" "}
+            {TvlData.length > 0
+              ? convertToBillion(TvlData[TvlData.length - 30].tvl)
+              : "Loading..."}
+          </p>
+        </div>
+
+        <div className="flex font-semibold items-center justify-between">
+          <p>Before 3months</p>
+          <p>
+            {" "}
+            ${" "}
+            {TvlData.length > 0
+              ? convertToBillion(TvlData[TvlData.length - 90].tvl)
+              : "Loading..."}
           </p>{" "}
         </div>
 
         <div className="flex font-semibold items-center justify-between">
-          <p>Last 6months</p>
+          <p>Before 6months</p>
           <p>
             {" "}
-            ${TvlData.length > 0 ? convertToBillion(m6) : "Loading..."}
+            ${" "}
+            {TvlData.length > 0
+              ? convertToBillion(TvlData[TvlData.length - 180].tvl)
+              : "Loading..."}
           </p>{" "}
         </div>
         <div className="flex font-semibold items-center justify-between">
-          <p>Last 1year</p>
+          <p>Before 1year</p>
           <p>
             {" "}
-            ${TvlData.length > 0 ? convertToBillion(y1) : "Loading..."}
+            ${" "}
+            {TvlData.length > 0
+              ? convertToBillion(TvlData[TvlData.length - 365].tvl)
+              : "Loading..."}
           </p>{" "}
         </div>
         <div className="flex font-semibold items-center justify-between">
-          <p>Last 2years</p>
+          <p>Before 2years</p>
           <p>
             {" "}
-            ${TvlData.length > 0 ? convertToBillion(y2) : "Loading..."}
+            ${" "}
+            {TvlData.length > 0
+              ? convertToBillion(TvlData[TvlData.length - 730].tvl)
+              : "Loading..."}
           </p>{" "}
         </div>
       </div>

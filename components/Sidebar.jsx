@@ -1,14 +1,19 @@
 import React, { useState } from "react";
 import Link from "next/link";
+import { useRecoilState } from "recoil";
+import { modalState } from "../atom/recoil";
 const Sidebar = () => {
   const [collapsed, setCollapsed] = useState(false);
   const [selectedButton, setSelectedButton] = useState(0);
   const toggleSidebar = () => {
     setCollapsed(!collapsed);
   };
+  const [isClicked, setIsClicked] = useRecoilState(modalState);
 
   const handleButtonClick = (buttonIndex = 0) => {
     setSelectedButton(buttonIndex);
+    setIsClicked(true);
+    // console.log(isClicked);
   };
 
   const getButtonColor = (buttonIndex = 0) => {

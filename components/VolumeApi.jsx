@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
 import { totalValue } from "../config/api";
+import { useRecoilState } from "recoil";
+import { modalState } from "../atom/recoil";
 
 const VolumeApi = ({ market_data, coin }) => {
+  const [isClicked, setIsClicked] = useRecoilState(modalState);
   const [volume, setVolume] = useState([]);
 
   const convertToBillion = (num) => {
@@ -21,6 +24,7 @@ const VolumeApi = ({ market_data, coin }) => {
         const response = await fetch(apiData);
         const graphData = await response.json();
         setVolume(graphData.total_volumes || []);
+       
       } catch (error) {
         console.log(error);
       }

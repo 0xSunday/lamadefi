@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { totalValue } from "../config/api";
 import { useRecoilState } from "recoil";
-import { modalState } from "../atom/recoil";
+import { modalState } from "../config/recoil";
 
 const VolumeApi = ({ market_data, coin }) => {
   const [isClicked, setIsClicked] = useRecoilState(modalState);

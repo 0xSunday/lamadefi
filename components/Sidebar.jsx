@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { useRecoilState } from "recoil";
-import { modalState } from "../atom/recoil";
+import { modalState } from "../config/recoil";
 const Sidebar = () => {
   const [collapsed, setCollapsed] = useState(false);
   const [selectedButton, setSelectedButton] = useState(0);

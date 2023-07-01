@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Graph from "./Graph";
 import ApiData from "./ApiData";
 import { useRecoilState } from "recoil";
-import { modalState } from "../atom/recoil";
+import { modalState } from "../config/recoil";
 import SkeletonLoad from "./SkeletonLoad";
 
 const RightSection = ({ data }) => {

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import RightSection from "../../../components/RightSection";
 import { SingleCoin } from "../../../config/api";
+import Head from "next/head";
 
 const index = ({ apiData }) => {
   // const apiData = SingleCoin("bitcoin");
@@ -13,7 +14,10 @@ const index = ({ apiData }) => {
 
   // console.log(apiData);
   return (
-    <div >
+    <div>
+      <Head>
+        <title>Lama Defi</title>
+      </Head>
       <RightSection data={apiData} />
       {/* <h1>hello sunil</h1> */}
     </div>

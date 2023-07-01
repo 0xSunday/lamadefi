@@ -1,3 +1,4 @@
+import Head from "next/head";
 import RightSection from "../../../components/RightSection";
 import { SingleCoin } from "../../../config/api";
 
@@ -15,6 +16,9 @@ const index = ({ apiData }) => {
   // console.log(data.market_data.current_price.usd);
   return (
     <div className="ml-72 mt-5 mr-3 bg-black pt-5 px-5 pb-2 rounded-lg">
+      <Head>
+        <title>Lama Defi</title>
+      </Head>
       <RightSection data={apiData} />
       {/* <h1>hello sunil</h1> */}
     </div>
